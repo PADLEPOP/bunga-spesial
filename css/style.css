@@ -10,9 +10,6 @@
   --dark-color: #000;
 }
 
-/* =================================
-   LATAR BELAKANG & JUDUL
-   ================================= */
 .title {
   position: absolute;
   width: 100%;
@@ -20,10 +17,10 @@
   margin-top: 50px;
   top: 0;
   left: 0;
-  color: #002D62; /* Warna teks biru tua agar terlihat di langit cerah */
+  color: white;
   font-family: 'Courier New', Courier, monospace;
   font-size: 70px;
-  text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8); /* Bayangan teks terang */
+  text-shadow: 0px 0px 20px white;
 }
 
 body {
@@ -31,48 +28,22 @@ body {
   align-items: flex-end;
   justify-content: center;
   min-height: 100vh;
+  background-color: var(--dark-color);
   overflow: hidden;
   perspective: 1000px;
 }
 
 .night {
   position: fixed;
-  left: 0;
+  left: 50%;
   top: 0;
+  transform: translateX(-50%);
   width: 100%;
   height: 100%;
-  z-index: -1; /* Taruh di belakang semua elemen */
-
-  /* Langit Biru */
-  background: linear-gradient(to bottom, #87CEEB, #B0E0E6);
-
-  /* Awan dan Gunung (dibuat dengan gradasi berlapis) */
-  background-image:
-    /* Awan */
-    radial-gradient(circle at 15% 20%, white 4%, rgba(255,255,255,0) 15%),
-    radial-gradient(circle at 25% 15%, white 5%, rgba(255,255,255,0) 20%),
-    radial-gradient(circle at 70% 25%, white 6%, rgba(255,255,255,0) 25%),
-    radial-gradient(circle at 85% 20%, white 4%, rgba(255,255,255,0) 18%),
-    
-    /* Gunung (Lapis Belakang) */
-    linear-gradient(160deg, #2E8B57 30%, transparent 60%),
-    linear-gradient(20deg, #2E8B57 30%, transparent 60%),
-
-    /* Gunung (Lapis Depan) */
-    linear-gradient(170deg, #3CB371 45%, transparent 60%),
-    linear-gradient(10deg, #3CB371 45%, transparent 60%),
-    
-    /* Langit Biru */
-    linear-gradient(to bottom, #87CEEB, #B0E0E6);
-
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  filter: blur(0.1vmin);
+  background-image: radial-gradient(ellipse at top, transparent 0%, var(--dark-color)), radial-gradient(ellipse at bottom, var(--dark-color), rgba(145, 233, 255, 0.2)), repeating-linear-gradient(220deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), repeating-linear-gradient(189deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), repeating-linear-gradient(148deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), linear-gradient(90deg, rgb(255, 255, 250), rgb(240, 240, 240));
 }
 
-
-/* =================================
-   BUNGA (7 BUAH)
-   ================================= */
 .flowers {
   position: relative;
   transform: scale(0.9);
@@ -172,6 +143,7 @@ body {
   animation: blooming-leaf-left var(--fl-speed) 1.9s backwards;
 }
 
+/* ATURAN BUNGA BARU */
 .flower--4 {
   left: -20%;
   transform: rotate(-10deg) scale(0.9);
@@ -286,6 +258,7 @@ body {
   animation-delay: 1.7s;
 }
 
+/* DELAY UNTUK BUNGA BARU */
 .flower__leafs--4 {
   animation-delay: 1.2s;
 }
@@ -311,16 +284,13 @@ body {
   filter: blur(10vmin);
 }
 
-/* =================================
-   MODEL BUNGA TULIP (BARU)
-   ================================= */
 .flower__leaf {
   position: absolute;
   bottom: 0;
   left: 50%;
-  width: 10vmin; /* Sedikit lebih lebar */
-  height: 12vmin;
-  border-radius: 50% 50% 5px 5px; /* Bentuk melengkung di atas, rata di bawah */
+  width: 8vmin;
+  height: 11vmin;
+  border-radius: 51% 49% 47% 53%/44% 45% 55% 69%;
   background-color: #ffc0cb;
   background-image: linear-gradient(to top, #e75480, #ffc0cb);
   transform-origin: bottom center;
@@ -329,24 +299,27 @@ body {
 }
 
 .flower__leaf--1 {
-  transform: translate(-80%, -5%) rotate(15deg) rotateY(40deg);
+  transform: translate(-10%, 1%) rotateY(40deg) rotateX(-50deg);
 }
 
 .flower__leaf--2 {
-  transform: translate(-50%, -10%) rotateX(-20deg); /* Kelopak tengah */
+  transform: translate(-50%, -4%) rotateX(40deg);
 }
 
 .flower__leaf--3 {
-  transform: translate(-20%, -5%) rotate(-15deg) rotateY(-40deg);
+  transform: translate(-90%, 0%) rotateY(45deg) rotateX(50deg);
 }
 
 .flower__leaf--4 {
-  display: none; /* Sembunyikan kelopak ke-4 */
+  width: 8vmin;
+  height: 8vmin;
+  transform-origin: bottom left;
+  border-radius: 4vmin 10vmin 4vmin 4vmin;
+  transform: translate(0%, 18%) rotateX(70deg) rotate(-43deg);
+  background-image: linear-gradient(to top, #e75480, #ffc0cb);
+  z-index: 1;
+  opacity: 0.8;
 }
-
-/* =================================
-   BAGIAN BUNGA LAINNYA
-   ================================= */
 
 .flower__white-circle {
   position: absolute;
@@ -1278,6 +1251,7 @@ body {
   }
 }
 
+/* ANIMASI GERAK BUNGA BARU */
 @keyframes moving-flower-4 {
   0%,
   100% {
